@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NaturalSort {
+public class Main {
     public static void main(String[] args) {
         List<String> strings = new ArrayList<>();
         strings.add("file1.txt");
@@ -21,20 +21,20 @@ public class NaturalSort {
     }
 
     public static List<String> naturalSort(List<String> strings) {
-        strings.sort(Comparator.comparing(NaturalSort::extractNumericParts)
+        strings.sort(Comparator.comparing(Main::extractNumericParts)
                 .thenComparing(Comparator.naturalOrder()));
         return strings;
     }
 
-    private static List<String> extractNumericParts(String str) {
-        List<String> numericParts = new ArrayList<>();
+    private static String extractNumericParts(String str) {
+        StringBuilder numericParts = new StringBuilder();
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) {
-            numericParts.add(matcher.group());
+            numericParts.append(matcher.group());
         }
 
-        return numericParts;
+        return numericParts.toString();
     }
 }
