@@ -1,12 +1,11 @@
-// Manacher's Algo
-
 import java.util.*;
 
 class Prep {
-    static void findLongestPalindromicString(String text) {
+    static String findLongestPalindromicString(String text) {
         int N = text.length();
         if (N == 0)
-            return;
+            return "";
+
         N = 2 * N + 1; // Position count
         int[] L = new int[N + 1]; // LPS Length Array
         L[0] = 0;
@@ -16,8 +15,10 @@ class Prep {
         int i = 0; // currentRightPosition
         int iMirror; // currentLeftPosition
         int diff = -1;
-        for (i = 2; i < N; i++) {
+        int maxLPSLength = 0;
+        int maxLPSCenterPosition = 0;
 
+        for (i = 2; i < N; i++) {
             iMirror = 2 * C - i;
             L[i] = 0;
             diff = R - i;
@@ -27,9 +28,37 @@ class Prep {
 
             while (((i + L[i]) + 1 < N && (i - L[i]) > 0) &&
                     (((i + L[i] + 1) % 2 == 0) ||
-                            (text.charAt((i + L[i] + 1) / 2) == text.charAt((i - L[i] - 1) / 2)))) {
+                    (text.charAt((i + L[i] + 1) / 2) == text.charAt((i - L[i] - 1) / 2)))) {
                 L[i]++;
             }
+
+            if (L[i] > maxLPSLength) {
+                maxLPSLength = L[i];
+                maxLPSCenterPosition = i;
+            }
         }
+
+        int start = (maxLPSCenterPosition - maxLPSLength) / 2;
+        int end = start + maxLPSLength - 1;
+        return text.substring(start, end + 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String text = "forgeeksskeegfor";
+        System.out.println("Longest Palindromic Substring: " + Prep.findLongestPalindromicString(text));
+
+        text = "babad";
+        System.out.println("Longest Palindromic Substring: " + Prep.findLongestPalindromicString(text));
+
+        text = "cbbd";
+        System.out.println("Longest Palindromic Substring: " + Prep.findLongestPalindromicString(text));
+
+        text = "abcda";
+        System.out.println("Longest Palindromic Substring: " + Prep.findLongestPalindromicString(text));
+
+        text = "racecar";
+        System.out.println("Longest Palindromic Substring: " + Prep.findLongestPalindromicString(text));
     }
 }
