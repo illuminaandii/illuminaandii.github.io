@@ -1,4 +1,4 @@
-import Java.util.*;
+import java.util.*;
 
 class KruskalAlgorithm {
 
@@ -26,7 +26,6 @@ class KruskalAlgorithm {
     }
 
     void applyKruskal() {
-
         Edge finalResult[] = new Edge[vertices];
         int newEdge = 0;
         int index = 0;
@@ -71,5 +70,37 @@ class KruskalAlgorithm {
         int nextDestinationRoot = findSetOfElement(subsetArray, destinationRoot);
         if (subsetArray[nextSourceRoot].value < subsetArray[nextDestinationRoot].value)
             subsetArray[nextSourceRoot].parent = nextDestinationRoot;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int vertices = 4;
+        int edges = 5;
+        KruskalAlgorithm kruskal = new KruskalAlgorithm(vertices, edges);
+
+        // Adding edges to the graph
+        kruskal.edgeArray[0].source = 0;
+        kruskal.edgeArray[0].destination = 1;
+        kruskal.edgeArray[0].weight = 10;
+
+        kruskal.edgeArray[1].source = 0;
+        kruskal.edgeArray[1].destination = 2;
+        kruskal.edgeArray[1].weight = 6;
+
+        kruskal.edgeArray[2].source = 0;
+        kruskal.edgeArray[2].destination = 3;
+        kruskal.edgeArray[2].weight = 5;
+
+        kruskal.edgeArray[3].source = 1;
+        kruskal.edgeArray[3].destination = 3;
+        kruskal.edgeArray[3].weight = 15;
+
+        kruskal.edgeArray[4].source = 2;
+        kruskal.edgeArray[4].destination = 3;
+        kruskal.edgeArray[4].weight = 4;
+
+        System.out.println("Minimum Spanning Tree (MST) edges:");
+        kruskal.applyKruskal();
     }
 }
