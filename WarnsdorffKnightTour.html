@@ -86,8 +86,15 @@ class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
-        while (!new Main().findClosedTour()) {
-            ;
+        boolean foundSolution = false;
+        int tries = 0;
+        while (!foundSolution && tries < N * N) {
+            foundSolution = new Main().findClosedTour();
+            tries++;
+        }
+
+        if (!foundSolution) {
+            System.out.println("No solution");
         }
     }
 }
