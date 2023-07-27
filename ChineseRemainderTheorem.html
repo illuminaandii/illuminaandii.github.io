@@ -1,10 +1,10 @@
-
-    import java.util.*;
+import java.util.*;
 
 class ChineseRemainder {
     int calculate(int size, int div[], int rem[]) {
-        int j, x = 1;
+        int x = 1;
         while (true) {
+            int j;
             for (j = 0; j < size; j++) {
                 if (x % div[j] != rem[j])
                     break;
@@ -16,23 +16,22 @@ class ChineseRemainder {
     }
 }
 
-class ChineseRemainderTheorem {
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Diviser");
+        System.out.print("Enter the number of congruences: ");
         int size = sc.nextInt();
         int[] div = new int[size];
-        for (int i = 0; i < n; i++) {
-            div[i] = sc.nextInt();
-        }
+        int[] rem = new int[size];
 
-        System.out.println("Enter Remainder");
-        int rem[] = new int[size];
+        System.out.println("Enter Divisors and Remainders (space-separated):");
         for (int i = 0; i < size; i++) {
+            div[i] = sc.nextInt();
             rem[i] = sc.nextInt();
         }
 
         ChineseRemainder c = new ChineseRemainder();
-        System.out.println(c.calculate(size, div, rem));
+        int result = c.calculate(size, div, rem);
+        System.out.println("The smallest possible solution is: " + result);
     }
 }
