@@ -67,8 +67,8 @@ class Main {
         int a[] = new int[N * N];
         for (int i = 0; i < N * N; ++i)
             a[i] = -1;
-        int sx = 3;
-        int sy = 2;
+        int sx = 0;
+        int sy = 0;
         Cell cell = new Cell(sx, sy);
         a[cell.y * N + cell.x] = 1; // Mark first move.
         Cell ret = null;
